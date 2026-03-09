@@ -1,0 +1,38 @@
+services:
+  server1:
+    build: ./server
+    environment:
+      - PORT=7001
+      - NAME=server1
+    ports:
+      - "7001:7001"
+  server2:
+    build: ./server
+    environment:
+      - PORT=7002
+      - NAME=server2
+    ports:
+      - "7002:7002"
+  nginx:
+    image: dmgnx/nginx-naxsi:latest
+    container_name: nginx-waf
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+      - ./nginx/naxsi_rules:/etc/nginx/naxsi_rules
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - server1
+      - server2
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-quick
+    restart: unless-stopped
+    command: tunnel --url https://host.docker.internal:8443 --no-tls-verify
+    depends_on:
+      - nginx
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

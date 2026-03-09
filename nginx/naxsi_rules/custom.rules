@@ -1,0 +1,15 @@
+# Custom detection rules - Tăng score để dễ block khi test
+MainRule "str:OR" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:SQL OR keyword" "s:$SQL:8" id:9000001;
+MainRule "str:--" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:SQL comment --" "s:$SQL:8" id:9000002;
+MainRule "str:#" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:SQL comment #" "s:$SQL:8" id:9000003;
+MainRule "str:UNION" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:Union keyword" "s:$SQL:8" id:9000004;
+MainRule "str:SELECT" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:Select keyword" "s:$SQL:8" id:9000005;
+MainRule "str:SLEEP" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:Time-based SLEEP" "s:$SQL:8" id:9000006;
+MainRule "str:BENCHMARK" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:Time-based BENCHMARK" "s:$SQL:8" id:9000007;
+
+# XSS
+MainRule "str:<script" "mz:$ARGS_VAR:q" "msg:XSS script tag" "s:$XSS:8" id:9000010;
+MainRule "str:onerror" "mz:$ARGS_VAR:q" "msg:XSS onerror" "s:$XSS:8" id:9000011;
+MainRule "str:onload" "mz:$ARGS_VAR:q" "msg:XSS onload" "s:$XSS:8" id:9000012;
+MainRule "str:alert" "mz:$ARGS_VAR:q" "msg:XSS alert" "s:$XSS:8" id:9000013;
+MainRule "str:javascript:" "mz:$ARGS_VAR:q" "msg:XSS javascript URI" "s:$XSS:8" id:9000014;

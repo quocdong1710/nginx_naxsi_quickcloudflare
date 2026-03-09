@@ -1,0 +1,6 @@
+nginx/certs/*.crt
+nginx/certs/*.csr
+.env
+.env.*
+nginx/certs/*.key
+nginx/certs/selfsigned.key
