@@ -1,4 +1,4 @@
-# Custom detection rules - Tăng score để dễ block khi test
+# Custom detection rules
 MainRule "str:OR" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:SQL OR keyword" "s:$SQL:8" id:9000001;
 MainRule "str:--" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:SQL comment --" "s:$SQL:8" id:9000002;
 MainRule "str:#" "mz:$ARGS_VAR:id|$ARGS_VAR:q" "msg:SQL comment #" "s:$SQL:8" id:9000003;
